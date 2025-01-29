@@ -20,7 +20,7 @@ if (length(tables) >= 2) {
   # Tabelle anzeigen
   print(second_table)
   
-  names(second_table)[2] <- c("logo")
+  names(second_table)[2] <- c("Team")
   
   table_links <- second_table |> 
     mutate(logo = case_when(
