@@ -19,9 +19,11 @@ jobs:
         with:
           r-version: '4.3'
 
-      - name: Abhängigkeiten installieren (rvest, dplyr, readr)
+      - name: Abhängigkeiten installieren
         run: |
-          Rscript -e 'install.packages(c("rvest", "dplyr", "readr"))'
+          Rscript -e 'install.packages("rvest")'
+          Rscript -e 'install.packages("dplyr")'
+          Rscript -e 'install.packages("readr")'
 
       - name: Tabelle scrapen und speichern
         run: |
