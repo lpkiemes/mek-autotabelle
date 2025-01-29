@@ -1,0 +1,41 @@
+name: Automatische Tabellenaktualisierung
+
+on:
+  schedule:
+    #- cron: "0 * * * *"  # Läuft jede Stunde
+    - cron: "*/10 * * * *"  # Alle 10 Minuten
+  workflow_dispatch:  # Manuelles Starten möglich
+
+jobs:
+  scrape-and-update:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Repository klonen
+        uses: actions/checkout@v4
+
+      - name: R installieren
+        uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: '4.3'
+
+      - name: Abhängigkeiten installieren (rvest, dplyr, readr)
+        run: |
+          Rscript -e 'install.packages(c("rvest", "dplyr", "readr"))'
+
+      - name: Tabelle scrapen und speichern
+        run: |
+          Rscript scrape_table.R
+
+      - name: Änderungen committen und pushen
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "actions@github.com"
+          git add tabelle.csv
+          git commit -m "Automatisch aktualisierte Tabelle" || echo "Keine Änderungen"
+          git push
+
+      - name: WordPress-Cache leeren (TablePress aktualisieren)
+        run: |
+          curl -X POST "${{ secrets.WP_URL }}/wp-json/wp/v2/flush-cache" \
+          --user "${{ secrets.WP_USERNAME }}:${{ secrets.WP_PASSWORD }}"
