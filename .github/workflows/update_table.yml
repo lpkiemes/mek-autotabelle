@@ -25,7 +25,6 @@ jobs:
           Rscript -e 'install.packages("curl")'  # Installiert das R-Paket curl
           Rscript -e 'install.packages("httr")'  # Installiert httr nach curl
           Rscript -e 'install.packages("rvest", dependencies = TRUE)'  # Installiert rvest nach httr
-          Rscript -e 'install.packages("dplyr", dependencies = TRUE)'
           Rscript -e 'install.packages("readr", dependencies = TRUE)'
 
       - name: Weitere Systembibliotheken installieren
