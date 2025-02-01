@@ -37,6 +37,7 @@ if (length(tables) >= 2) {
   second_table$Team[is.na(second_table$Team)] <- NA
   
   # Spaltenname
+  names(second_table)[1] <- c("")
   names(second_table)[2] <- c("")
   
   # Tabelle als CSV speichern
@@ -45,3 +46,4 @@ if (length(tables) >= 2) {
 } else {
   cat("Es wurde keine zweite Tabelle auf der Seite gefunden.")
 }
+
