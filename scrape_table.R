@@ -19,7 +19,7 @@ if (length(tables) >= 2) {
   # Tabelle anzeigen
   print(second_table)
   
-  second_table$Team <- NA  # Neue Spalte für die Logos
+  names(second_table)[2] <- c("Team")
   
   # Logos basierend auf dem Verein zuweisen
   second_table$Team[second_table$Verein == "EV Mittenwald"] <- '<a href="https://www.die-luchse.de/wp-content/uploads/2024/08/Logo-EV-Mittenwald.png"><img src="https://www.die-luchse.de/wp-content/uploads/2024/08/Logo-EV-Mittenwald.png" alt="" width="25" class="alignnone size-full wp-image-10764" /></a>'
