@@ -36,6 +36,9 @@ if (length(tables) >= 2) {
   # Falls der Verein nicht übereinstimmt, bleibt die Spalte leer
   second_table$Team[is.na(second_table$Team)] <- NA
   
+  # Spaltenname
+  names(second_table)[2] <- c("")
+  
   # Tabelle als CSV speichern
   write_csv(second_table, "tabelle.csv")
   cat("Zweite Tabelle erfolgreich als tabelle.csv gespeichert!")
