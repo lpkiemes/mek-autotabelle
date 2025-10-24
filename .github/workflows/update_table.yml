@@ -35,12 +35,16 @@ jobs:
       - name: Tabelle scrapen und speichern
         run: |
           Rscript scrape_table.R
+          Rscript scrape_table_u15.R
+          Rscript scrape_table_u13.R
 
       - name: Änderungen committen und pushen
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "actions@github.com"
           git add tabelle.csv
+          git add tabelle_U15.csv
+          git add tabelle_U13.csv
           git commit -m "Automatisch aktualisierte Tabelle" || echo "Keine Änderungen"
           git push https://github-actions:${{ secrets.GH_TOKEN }}@github.com/lpkiemes/mek-autotabelle.git HEAD:main
 
